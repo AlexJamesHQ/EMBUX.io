@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EMBUX - Ways to earn money from home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== root & global ===== */
+        :root {
+            --primary: #007AFF;
+            --accent: #5856D6;
+            --success: #34C759;
+            --bg-light: #F5F5F7;
+            --card-light: rgba(255, 255, 255, 0.8);
+            --text-light: #1D1D1F;
+            --bg-dark: #000000;
+            --card-dark: rgba(28, 28, 30, 0.8);
+            --text-dark: #F5F5F7;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --blur: blur(20px);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            --ios-curve: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ===== টেক্সট কপি প্রোটেকশন: সিলেক্ট ও কপি বন্ধ ===== */
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: var(--transition);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
+            -webkit-user-select: none;  /* Chrome/Safari */
+            -moz-user-select: none;     /* Firefox */
+            -ms-user-select: none;      /* IE/Edge */
+            user-select: none;          /* মানে কোনো টেক্সট সিলেক্ট করা যাবে না */
+        }
+
+        /* শুধুমাত্র নির্দিষ্ট ক্লাসের এলিমেন্টে সিলেক্ট অনুমোদিত */
+        .selectable-text, 
+        .selectable-text *,
+        .btn, 
+        .btn *,
+        .fab-label,
+        .fab-label *,
+        .policy-link,
+        .policy-link *,
+        .social-item,
+        .social-item *,
+        .follow-btn,
+        .follow-btn *,
+        .close-btn,
+        .close-btn *,
+        input, 
+        textarea, 
+        [contenteditable="true"] {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* হাইলাইট কালার শুধু অনুমোদিত এলিমেন্টের জন্য */
+        .selectable-text::selection,
+        .btn::selection,
+        .fab-label::selection,
+        .policy-link::selection,
+        .social-item::selection {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            background-image: radial-gradient(circle at 50% 0%, rgba(10, 132, 255, 0.15) 0%, transparent 50%);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .dark-mode header {
+            background: rgba(28, 28, 30, 0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- LOGO & PROFILE SECTION (profile icon added) --- */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-gif {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+            pointer-events: none; /* GIF-এ ক্লিক প্রয়োজন নেই */
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #8F4A6A, #F27DBB, #F6B6D8, #7A4FA3, #1E1C2A, #8F4A6A);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+            position: relative;
+        }
+        .logo::after {
+            content: 'EMBUX';
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            background: inherit;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: blur(15px);
+            opacity: 0.4;
+        }
+        @keyframes shine {
+            to { background-position: -200% center; }
+        }
+
+        /* --- Profile Icon (clickable) --- */
+        .profile-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(0,122,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            margin-left: 10px;
+        }
+        .profile-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+        .dark-mode .profile-icon {
+            border-color: rgba(255,255,255,0.2);
+            color: #0A84FF;
+        }
+        .dark-mode .profile-icon:hover {
+            background: #0A84FF;
+            color: black;
+        }
+
+        .theme-switch {
+            width: 50px;
+            height: 28px;
+            background: #E5E5EA;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .dark-mode .theme-switch { background: #3A3A3C; }
+        
+        .theme-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px; left: 2px;
+            width: 24px; height: 24px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+        .dark-mode .theme-switch::after { transform: translateX(22px); background: var(--primary); }
+
+        /* --- header right group --- */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* --- Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 120px 20px 100px;
+        }
+
+        /* --- Hero --- */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #86868B;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* --- Grid & Cards --- */
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--card-light);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        .dark-mode .card {
+            background: var(--card-dark);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card.reveal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            background: rgba(0, 122, 255, 0.1);
+        }
+        .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+        .card p { font-size: 15px; color: #86868B; margin-bottom: 25px; line-height: 1.5; flex-grow: 1; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            text-decoration: none !important;
+            /* selectable via class */
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .btn:hover::after { opacity: 1; }
+        .btn, .btn:hover, .btn:focus, .btn:active { text-decoration: none !important; }
+
+        /* icon colors */
+        .fb-color { color: #1877F2; background: rgba(24, 119, 242, 0.1); }
+        .ig-color { color: #E4405F; background: rgba(228, 64, 95, 0.1); }
+        .gm-color { color: #EA4335; background: rgba(234, 67, 53, 0.1); }
+        .tw-color { color: #1DA1F2; background: rgba(29, 161, 242, 0.1); }
+        .dl-color { color: #34C759; background: rgba(52, 199, 89, 0.1); }
+        .tg-color { color: #0088CC; background: rgba(0, 136, 204, 0.1); }
+
+        .btn-blue { background: #007AFF; }
+        .btn-grad { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
+        .btn-red { background: #EA4335; }
+        .btn-sky { background: #1DA1F2; }
+        .btn-green { background: #34C759; }
+        .btn-tg { background: #0088CC; }
+
+        /* --- support menu --- */
+        .support-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        .main-fab {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            outline: none;
+        }
+        .main-fab.active { transform: rotate(45deg); background: #FF3B30; }
+        .sub-fab {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            pointer-events: none;
+            transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-decoration: none;
+        }
+        .sub-fab.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+        .fab-label {
+            background: var(--card-light);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--text-light);
+            backdrop-filter: blur(10px);
+        }
+        .dark-mode .fab-label { background: var(--card-dark); color: white; }
+        .fab-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- iOS modal (noname design) --- */
+        .profile-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .profile-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .ios-card {
+            width: 360px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-radius: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            transform: translateY(30px) scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .profile-modal.show .ios-card {
+            transform: translateY(0) scale(1);
+        }
+        .dark-mode .ios-card {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .image-container {
+            width: 100%;
+            height: 280px;
+            border-radius: 35px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .ios-card:hover .image-container img { transform: scale(1.1); }
+        .info { text-align: left; }
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1d1d1f;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .dark-mode .name { color: #f5f5f7; }
+        .verify-icon { color: #0071e3; font-size: 20px; }
+        .role {
+            font-size: 15px;
+            color: #424245;
+            margin: 4px 0 12px 0;
+            font-weight: 500;
+        }
+        .dark-mode .role { color: #a1a1a6; }
+        .bio {
+            font-size: 14px;
+            color: #6e6e73;
+            line-height: 1.4;
+            margin-bottom: 25px;
+        }
+        .dark-mode .bio { color: #8e8e93; }
+        .social-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .social-item {
+            flex: 1;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 20px;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark-mode .social-item {
+            background: rgba(40,40,42,0.5);
+            color: #f5f5f7;
+        }
+        .social-item:hover {
+            background: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+        .dark-mode .social-item:hover {
+            background: #2c2c2e;
+        }
+        .close-profile {
+            text-align: right;
+            margin-bottom: 10px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #1d1d1f;
+        }
+        .dark-mode .close-profile { color: #f5f5f7; }
+
+        /* --- iOS Style Modal for Terms & Policies --- */
+        .ios-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s var(--ios-curve);
+        }
+        .ios-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .ios-modal-content {
+            background: var(--bg-light);
+            width: 100%;
+            max-width: 600px;
+            height: 80vh;
+            border-radius: 40px 40px 0 0;
+            padding: 30px 25px;
+            transform: translateY(100%);
+            transition: 0.5s var(--ios-curve);
+            overflow-y: auto;
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .ios-modal-content {
+            background: #1C1C1E;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ios-modal-overlay.active .ios-modal-content {
+            transform: translateY(0);
+        }
+        .modal-handle {
+            width: 40px;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .dark-mode .modal-handle {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .modal-header {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 25px 0 20px;
+            text-align: center;
+            color: var(--primary);
+        }
+        .modal-body h4 {
+            margin: 20px 0 10px;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .modal-body p, .modal-body ul {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-dim);
+            margin-bottom: 15px;
+        }
+        .modal-body ul {
+            padding-left: 20px;
+        }
+        .modal-body li {
+            margin-bottom: 5px;
+        }
+        .close-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .close-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #86868B;
+            font-size: 13px;
+        }
+        .policy-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 1px dashed currentColor;
+            padding-bottom: 2px;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-wrapper">
+        <img class="logo-gif" src="https://i.postimg.cc/J40Wv4sH/d0d8956376095f5bc8b45ce380b8a2ea.gif" alt="EMBUX GIF">
+        <div class="logo"><span>EMBUX</span></div>
+    </div>
+    <div class="header-actions">
+        <!-- profile icon added -->
+        <div class="profile-icon" id="profileModalBtn"><i class="fas fa-user-circle"></i></div>
+        <div class="theme-switch" id="modeToggle"></div>
+    </div>
+</header>
+
+<!-- main content -->
+<div class="container">
+    <div class="hero">
+        <h1>EMBUX - Ways to earn money from home</h1>
+        <p>EmBux — Earn on simple tasks. Instant payouts, repeatable jobs, and real rewards.</p>
+    </div>
+
+    <div class="section-title">Social account selling website</div>
+    <div class="grid">
+        <a href="http://embux.io/?ref=289" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box ig-color"><i class="fab fa-instagram"></i></div>
+            <h3>Instagram Accounts Sell</h3>
+            <p>Instant payouts via Embux.io. Sell your Instagram accounts safely and earn real money.</p>
+            <span class="btn btn-grad" style="pointer-events: none;">Sell on Embux.io <i class="fas fa-arrow-right" style="margin-left:8px;"></i></span>
+        </a>
+        <a href="https://easyearn.cash/?ref=VxXjxJoQw2c" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box ig-color"><i class="fab fa-instagram"></i></div>
+            <h3>Instagram Accounts Sell</h3>
+            <p>EasyEarn.cash - Best platform to sell Instagram accounts. Instant payment and 24/7 support.</p>
+            <span class="btn btn-grad" style="pointer-events: none;">Sell on EasyEarn <i class="fas fa-arrow-right" style="margin-left:8px;"></i></span>
+        </a>
+        <a href="https://alexjameshq.github.io/FB-EMBUX.io/" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box fb-color"><i class="fab fa-facebook-f"></i></div>
+            <h3>Facebook Accounts Sell</h3>
+            <p>Facebook accounts sell. Instant payouts and repeatable jobs available 24/7.</p>
+            <span class="btn btn-blue" style="pointer-events: none;">Start Selling <i class="fas fa-arrow-right" style="margin-left:8px;"></i></span>
+        </a>
+    </div>    
+
+    <div class="section-title">Social account selling Telegram Bots</div>
+    <div class="grid">
+        <a href="https://t.me/easyfarmerbux_bot?start=7148933505" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box ig-color"><i class="fab fa-instagram"></i></div>
+            <h3>Instagram Accounts Sell Bot</h3>
+            <p>Instant payouts EmBux - Earn on simple tasks. Instant payouts, repeatable jobs, and real rewards.</p>
+            <span class="btn btn-grad" style="pointer-events: none;">Open Bot <i class="fab fa-telegram-plane" style="margin-left:8px;"></i></span>
+        </a>
+        <a href="https://t.me/TaskUpesy_bot?start=7148933505" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box ig-color"><i class="fab fa-instagram"></i></div>
+            <h3>Instagram Accounts Sell Bot</h3>
+            <p>Instant payouts EmBux - Earn on simple tasks. Instant payouts, repeatable jobs, and real rewards.</p>
+            <span class="btn btn-grad" style="pointer-events: none;">Open Bot <i class="fab fa-telegram-plane" style="margin-left:8px;"></i></span>
+        </a>
+        <a href="https://t.me/gofastbux_bot?start=7148933505" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box tw-color"><i class="fab fa-twitter"></i></div>
+            <h3>X (Twitter) Accounts Sell Bot</h3>
+            <p>X (Twitter) accounts sell. Instant payouts and repeatable jobs available 24/7.</p>
+            <span class="btn btn-sky" style="pointer-events: none;">Open Bot <i class="fab fa-telegram-plane" style="margin-left:8px;"></i></span>
+        </a>
+    </div>    
+
+    <div class="section-title">Gmail Accounts Selling Telegram Bots</div>
+    <div class="grid">
+        <a href="https://t.me/easy_money_bux_bot?start=7148933505" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box gm-color"><i class="fas fa-envelope"></i></div>
+            <h3>Gmail Accounts Sell Bot</h3>
+            <p>Earn money by completing simple tasks on Telegram. Instant payouts and repeatable jobs available 24/7.</p>
+            <span class="btn btn-red" style="pointer-events: none;">Open Bot <i class="fab fa-telegram-plane" style="margin-left:8px;"></i></span>
+        </a>
+        <a href="https://t.me/GmailFarmerBot?start=7148933505" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box gm-color"><i class="fas fa-envelope"></i></div>
+            <h3>Gmail Accounts Sell Bot Farmer</h3>
+            <p>Earn money by completing simple tasks on Telegram. Instant payouts and repeatable jobs available 24/7.</p>
+            <span class="btn btn-red" style="pointer-events: none;">Open Bot <i class="fab fa-telegram-plane" style="margin-left:8px;"></i></span>
+        </a>
+        <a href="https://t.me/GmailFProBot?start=7148933505" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box gm-color"><i class="fas fa-envelope"></i></div>
+            <h3>Gmail Accounts Sell Bot Pro</h3>
+            <p>Earn money by completing simple tasks on Telegram. Instant payouts and repeatable jobs available 24/7.</p>
+            <span class="btn btn-red" style="pointer-events: none;">Open Bot <i class="fab fa-telegram-plane" style="margin-left:8px;"></i></span>
+        </a>
+    </div>
+
+    <div class="section-title">Dollar Buy/Sell website</div>
+    <div class="grid">
+        <a href="https://alexjameshq.github.io/DollarValy.io/" target="_blank" class="card" style="text-decoration: none; color: inherit; border: 1px solid var(--success);">
+            <div class="icon-box dl-color"><i class="fas fa-exchange-alt"></i></div>
+            <h3>Dollar Exchange</h3>
+            <p>Buy or sell dollars instantly. Secure gateway with low fees.</p>
+            <span class="btn btn-green" style="pointer-events: none;">Exchange Now</span>
+        </a>
+    </div>    
+
+    <div class="section-title">Gemini AI</div>
+    <div class="grid">
+        <a href="https://alexjameshq.github.io/iOS-FILTER.io/" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><linearGradient id="geminiGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4facfe"/><stop offset="100%" stop-color="#9246e6"/></linearGradient></defs>
+                    <path d="M12 2C12 2 12.5 7 15 9.5C17.5 12 22 12 22 12C22 12 17.5 12 15 14.5C12.5 17 12 22 12 22C12 22 11.5 17 9 14.5C6.5 12 2 12 2 12C2 12 6.5 12 9 9.5C11.5 7 12 2 12 2Z" fill="url(#geminiGradient)"/>
+                </svg>
+            </div>
+            <h3>Gemini AI</h3>
+            <p>IPhone Samsung Google Pixel Gemini Ai prompt.</p>
+            <span class="btn btn-tg" style="pointer-events: none;">Gemini AI prompt website</span>
+        </a>
+    </div>
+
+    <div class="section-title">Official Telegram Channel</div>
+    <div class="grid">
+        <a href="https://t.me/EMBUX8504" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+            <div class="icon-box tg-color"><i class="fas fa-users"></i></div>
+            <h3>Official Telegram Channel</h3>
+            <p>Join our official Telegram channel! To get the fastest updates, exclusive content, and all important information first, join our channel today.</p>
+            <span class="btn btn-tg" style="pointer-events: none;">Join Official Telegram Channel</span>
+        </a>
+    </div>
+</div>
+
+<!-- Floating Support Menu -->
+<div class="support-wrapper">
+    <button class="main-fab pulse-effect" onclick="toggleMenu()"><i class="fas fa-headset" id="main-icon"></i></button>
+    <a href="https://wa.me/8801977547920" target="_blank" class="sub-fab" style="transition-delay: 0.1s;">
+        <span class="fab-label">WhatsApp</span>
+        <div class="fab-icon" style="background: #25D366;"><i class="fab fa-whatsapp"></i></div>
+    </a>
+    <a href="https://t.me/Alex_EMBUX7920" target="_blank" class="sub-fab" style="transition-delay: 0.2s;">
+        <span class="fab-label">Telegram</span>
+        <div class="fab-icon" style="background: #0088CC;"><i class="fab fa-telegram-plane"></i></div>
+    </a>
+    <a href="https://t.me/EMBUX8504" target="_blank" class="sub-fab" style="transition-delay: 0.3s;">
+        <span class="fab-label">Telegram Channel</span>
+        <div class="fab-icon" style="background: #0088CC;"><i class="fa-solid fa-bell"></i></div>
+    </a>
+    <a href="https://alexjameshq.github.io/DollarValy.io/" target="_blank" class="sub-fab" style="transition-delay: 0.4s;">
+        <span class="fab-label">Dollar Exchange</span>
+        <div class="fab-icon" style="background: #0088CC;"><i class="fa-solid fa-handshake"></i></div>
+    </a>
+</div>
+
+<!-- iOS Style Modal for Terms & Policies -->
+<div class="ios-modal-overlay" id="iosPolicyModal" onclick="closeOnOutside(event)">
+    <div class="ios-modal-content" onclick="event.stopPropagation()">
+        <div class="modal-handle"></div>
+        <div class="modal-header">Terms & Privacy</div>
+        <div class="modal-body">
+            <h4>Terms of Service</h4>
+            <p><small>Last updated: March 10, 2026</small></p>
+            <p>Welcome to EMBUX. By using our services, you agree to the following terms and conditions:</p>
+            
+            <h4>1. Account Rules</h4>
+            <ul>
+                <li>One account per person. Multi-accounting leads to a ban.</li>
+                <li>Submitted accounts must be verified and active.</li>
+            </ul>
+            
+            <h4>2. Payments</h4>
+            <ul>
+                <li>Payments are processed within 24 hours.</li>
+                <li>Minimum withdrawal limits apply per method.</li>
+            </ul>
+            
+            <h4>3. Contact Us</h4>
+            <p>If you have any questions or require assistance, you can contact us directly via Telegram or WhatsApp.</p>
+            
+            <h4>4. Privacy Policy</h4>
+            <p>We collect your Telegram ID and payout details solely for processing transactions. We do not sell your data to third parties.</p>
+            
+            <p><strong>Project Links:</strong> The user must exercise their own caution when using third-party links on our site. EMBUX will not be responsible for any financial loss.</p>
+            
+            <p><strong>Changes:</strong> We reserve the right to change these terms and conditions at any time without prior notice.</p>
+            
+            <button class="close-btn" onclick="closeIOSModal()">I Understand</button>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Modal (iOS card) -->
+<div class="profile-modal" id="profileModal">
+    <div class="ios-card">
+        <div class="close-profile" onclick="closeProfileModal()"><i class="fas fa-times-circle"></i></div>
+        <div class="image-container">
+            <img src="https://i.postimg.cc/nVBrKZBy/Alex_James.jpg" alt="Alex James">
+        </div>
+        <div class="info">
+            <h2 class="name">・ΛLΣX JΛMΞS <i class="fa-brands fa-apple"></i></h2>
+            <p class="role">UI/UX, Web/App Development, 3D & Branding Agency.</p>
+            <p class="bio">Founder of EMBUX. Specializing in high-end UI/UX and scalable web ecosystems. Dedicated to crafting seamless digital solutions for the modern earner.</p>
+        </div>
+        <div class="social-row">
+        <a href="https://alexjameshq.github.io/AlexJamesHQ.io/" target="_blank" class="social-item"><i class="fas fa-user-circle"></i></a>
+        <a href="https://www.youtube.com/@ALEX-JAMES-8504" target="_blank" class="social-item"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.facebook.com/share/1Y56tdf1S5/" target="_blank" class="social-item"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/alex.james7830?igsh=dDg5cG5nZTB6aDBx" target="_blank" class="social-item"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <button class="follow-btn" onclick="window.open('https://t.me/EMBUX8504','_blank')" style="width:100%; padding:16px; background:#1d1d1f; color:#fff; border:none; border-radius:20px; font-weight:600; cursor:pointer;">Follow</button>
+    </div>
+</div>
+
+<footer>
+    <div class="logo-wrapper" style="margin: 0 auto 15px; width: fit-content;">
+        <img class="logo-gif" src="https://i.postimg.cc/J40Wv4sH/d0d8956376095f5bc8b45ce380b8a2ea.gif" alt="EMBUX GIF" style="width:30px; height:30px;">
+        <div class="logo" style="font-size:20px;">EMBUX</div>
+    </div>
+    <p>&copy; 2024-2026 EmBux. All rights reserved.</p>
+    <p style="margin-top:5px; opacity:0.6;">Powered by Alex James</p>
+    <span class="policy-link" onclick="showIOSModal()">Terms and Privacy Policy</span>
+</footer>
+
+<script>
+    // dark mode
+    const toggleBtn = document.getElementById('modeToggle');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('embuxTheme', document.body.classList.contains('dark-mode'));
+    });
+    if(localStorage.getItem('embuxTheme') === 'true') document.body.classList.add('dark-mode');
+
+    // scroll animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+
+    // floating menu
+    let isMenuOpen = false;
+    const mainIcon = document.getElementById('main-icon');
+    const mainFab = document.querySelector('.main-fab');
+    const subFabs = document.querySelectorAll('.sub-fab');
+    window.toggleMenu = function() {
+        isMenuOpen = !isMenuOpen;
+        if(isMenuOpen) {
+            mainFab.classList.add('active');
+            mainIcon.classList.remove('fa-headset');
+            mainIcon.classList.add('fa-times');
+            subFabs.forEach(fab => fab.classList.add('show'));
+        } else {
+            mainFab.classList.remove('active');
+            mainIcon.classList.remove('fa-times');
+            mainIcon.classList.add('fa-headset');
+            subFabs.forEach(fab => fab.classList.remove('show'));
+        }
+    }
+
+    // iOS Style Modal for Terms & Policies
+    const iosModal = document.getElementById('iosPolicyModal');
+    
+    window.showIOSModal = function() {
+        iosModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (isMenuOpen) toggleMenu();
+    }
+    
+    window.closeIOSModal = function() {
+        iosModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    window.closeOnOutside = function(e) {
+        if (e.target === iosModal) closeIOSModal();
+    }
+
+    // profile modal
+    const profileModal = document.getElementById('profileModal');
+    const profileBtn = document.getElementById('profileModalBtn');
+    profileBtn.addEventListener('click', () => {
+        profileModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    });
+    window.closeProfileModal = function() {
+        profileModal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    profileModal.addEventListener('click', function(e) {
+        if (e.target === profileModal) closeProfileModal();
+    });
+
+    // অতিরিক্ত: কীবোর্ড শর্টকাটে কপি/কাট আটকানো (Ctrl+C, Ctrl+X)
+    document.addEventListener('keydown', function(e) {
+        // শুধু অনুমোদিত এলিমেন্টে কপি/কাট সক্রিয় থাকবে (যেমন .selectable-text বা বাটন)
+        const active = document.activeElement;
+        const isAllowed = active && (active.classList.contains('btn') || 
+                           active.classList.contains('selectable-text') ||
+                           active.classList.contains('fab-label') ||
+                           active.closest('.btn') || 
+                           active.closest('.selectable-text') ||
+                           active.closest('.policy-link') ||
+                           active.closest('.social-item') ||
+                           active.closest('.close-btn') ||
+                           active.tagName === 'INPUT' || 
+                           active.tagName === 'TEXTAREA');
+        
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x' || e.key === 'v')) {
+            if (!isAllowed) {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+
+    // অননুমোদিত ড্র্যাগ কপি আটকানো (যেমন ছবি)
+    document.addEventListener('dragstart', (e) => e.preventDefault());
+</script>
+
+<style>
+    .pulse-effect { animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(0, 122, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0); } }
+</style>
+</body>
+</html>
